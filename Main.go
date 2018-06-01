@@ -10,7 +10,9 @@ func main() {
 
 	// adding modules
 	err := serverInstance.AddModules([]*restful.WebService{
-		http.NewTestingModule() })
+		http.NewTestingModule(),
+		http.NewTemplateModule(),
+	})
 	if err != nil {
 		panic(err)
 	}
