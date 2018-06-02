@@ -10,6 +10,7 @@ package datastore
  *  2. Template(s) (templates generated and picked eventually)
  */
 type Project struct {
+	Id        string
 	Design    *Design
 	Templates []*Template
 }

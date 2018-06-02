@@ -1,10 +1,10 @@
 package datastore
 
 
-func NewDesignEntity() Design {
+func NewDesignEntity() *Design {
 	design := Design{}
 
-	return design
+	return &design
 }
 
 func (o *Design) AddSpec(spec *Spec) *Design {

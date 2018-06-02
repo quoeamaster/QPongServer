@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"strings"
 	"strconv"
+	"fmt"
 )
 
 type Origin struct {
@@ -11,6 +12,10 @@ type Origin struct {
 	Host string
 	Port int
 	Protocol string // http or https etc
+}
+
+func (o *Origin) String() string {
+	return fmt.Sprintf("address: %v", o.Address)
 }
 
 /**

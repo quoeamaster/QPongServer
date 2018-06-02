@@ -5,13 +5,32 @@ import (
 	"github.com/emicklei/go-restful"
 	"fmt"
 	"QPongServer/util"
+	"sync"
 )
+
+
+// singleton... MUST be handled here
+var syncLock sync.Once
+var serverInstance QPongServerInstance
 
 type QPongServerInstance struct {
 	ServerConfig *util.Config
 }
 
-func NewQPongServer() QPongServerInstance {
+/**
+ *  sort of a singleton method to return the only instance of QPongServer
+ */
+func GetQPongServer() QPongServerInstance {
+	syncLock.Do(func() {
+		serverInstance = newQPongServer()
+	})
+	return serverInstance
+}
+
+/**
+ *  make the init method PRIVATE
+ */
+func newQPongServer() QPongServerInstance {
 	instance := QPongServerInstance{}
 
 	filePtr, err := util.GetConfigFile()
@@ -45,3 +64,6 @@ func (server *QPongServerInstance) StartServer(config *util.Config) error {
 
 	return http.ListenAndServe(serverPortString, nil)
 }
+
+
+

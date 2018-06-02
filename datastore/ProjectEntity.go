@@ -1,5 +1,11 @@
 package datastore
 
+func NewProjectEntity(id string) *Project {
+	project := Project{}
+	project.Id = id
+	return &project
+}
+
 func (o *Project) AddDesign(design *Design) *Project {
 	o.Design = design
 	return o

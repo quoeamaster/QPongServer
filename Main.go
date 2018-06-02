@@ -5,8 +5,11 @@ import (
 	"QPongServer/http"
 )
 
+// TODO: make it singelton???
+var serverInstance http.QPongServerInstance
+
 func main() {
-	serverInstance := http.NewQPongServer()
+	serverInstance = http.GetQPongServer()
 
 	// adding modules
 	err := serverInstance.AddModules([]*restful.WebService{
