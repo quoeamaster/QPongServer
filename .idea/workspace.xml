@@ -3,14 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="737bbf8c-5b34-4a4a-bcb8-6667ffcf16de" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Gopkg.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Gopkg.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.go" beforeDir="false" afterPath="$PROJECT_DIR$/Main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datastore/DesignEntity.go" beforeDir="false" afterPath="$PROJECT_DIR$/datastore/DesignEntity.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datastore/ProjectEntity.go" beforeDir="false" afterPath="$PROJECT_DIR$/datastore/ProjectEntity.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/datastore/ProjectStructs.go" beforeDir="false" afterPath="$PROJECT_DIR$/datastore/ProjectStructs.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/http/Server.go" beforeDir="false" afterPath="$PROJECT_DIR$/http/Server.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gopkg.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gopkg.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datastore/ESConnector.go" beforeDir="false" afterPath="$PROJECT_DIR$/datastore/ESConnector.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datastore/ProjectService.go" beforeDir="false" afterPath="$PROJECT_DIR$/datastore/ProjectService.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/http/TemplateModule.go" beforeDir="false" afterPath="$PROJECT_DIR$/http/TemplateModule.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/util/HttpUtil.go" beforeDir="false" afterPath="$PROJECT_DIR$/util/HttpUtil.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,14 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TemplateModule.go" pinned="false" current-in-tab="true">
+      <file leaf-file-name="TemplateModule.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/http/TemplateModule.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="205">
-              <caret line="43" column="41" lean-forward="true" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
-              <folding>
-                <element signature="e#14#65#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="490">
+              <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -45,11 +38,20 @@
       <file leaf-file-name="ProjectService.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/datastore/ProjectService.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="24" selection-start-line="24" selection-end-line="24" />
+            <state relative-caret-position="308">
+              <caret line="31" column="9" lean-forward="true" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
               <folding>
                 <element signature="e#19#79#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ESConnector.go" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/datastore/ESConnector.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="550">
+              <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
             </state>
           </provider>
         </entry>
@@ -79,7 +81,6 @@
         <option value="$PROJECT_DIR$/http/TestingModule.go" />
         <option value="$PROJECT_DIR$/util/TypeUtil.go" />
         <option value="$PROJECT_DIR$/util/Configuration.go" />
-        <option value="$PROJECT_DIR$/datastore/ESConnector.go" />
         <option value="$PROJECT_DIR$/datastore/SpecEntity.go" />
         <option value="$PROJECT_DIR$/datastore/TextBlockEntity.go" />
         <option value="$PROJECT_DIR$/datastore/ProjectStructs.go" />
@@ -91,6 +92,7 @@
         <option value="$PROJECT_DIR$/util/HttpUtil.go" />
         <option value="$PROJECT_DIR$/datastore/ProjectService.go" />
         <option value="$PROJECT_DIR$/http/TemplateModule.go" />
+        <option value="$PROJECT_DIR$/datastore/ESConnector.go" />
       </list>
     </option>
   </component>
@@ -110,7 +112,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -137,6 +138,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -180,12 +182,12 @@
     <frame x="0" y="23" width="1280" height="777" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26171243" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2657512" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32876712" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32876712" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32876712" />
@@ -212,6 +214,37 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/http/TemplateModule.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/http/ModuleError.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="5" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datastore/ProjectService.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="60" selection-start-line="28" selection-start-column="60" selection-end-line="28" selection-end-column="60" />
+          <folding>
+            <element signature="e#19#79#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datastore/ESConnector.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="31" selection-start-line="6" selection-start-column="31" selection-end-line="6" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/util/HttpUtil.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="540">
@@ -237,9 +270,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
           <caret line="2" column="50" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
-          <folding>
-            <element signature="e#19#95#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -327,12 +357,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Gopkg.lock">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Gopkg.toml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/datastore/ProjectStructs.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="180">
@@ -354,13 +378,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/http/Server.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/util/HttpUtil.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-20">
@@ -375,13 +392,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/datastore/ESConnector.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="470">
-          <caret line="48" column="14" selection-start-line="48" selection-start-column="14" selection-end-line="48" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/datastore/ProjectEntity.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -389,13 +399,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/datastore/ProjectService.go">
+    <entry file="file://$PROJECT_DIR$/http/Server.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
-          <folding>
-            <element signature="e#19#79#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="505">
+          <caret line="68" lean-forward="true" selection-start-line="68" selection-end-line="68" />
         </state>
       </provider>
     </entry>
@@ -406,13 +413,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/datastore/ProjectService.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="31" column="9" lean-forward="true" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+          <folding>
+            <element signature="e#19#79#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/http/TemplateModule.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="43" column="41" lean-forward="true" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
-          <folding>
-            <element signature="e#14#65#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="490">
+          <caret line="42" column="37" selection-start-line="42" selection-start-column="37" selection-end-line="42" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datastore/ESConnector.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="54" lean-forward="true" selection-start-line="54" selection-end-line="54" />
         </state>
       </provider>
     </entry>

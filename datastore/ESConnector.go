@@ -2,8 +2,8 @@ package datastore
 
 import (
 	"QPongServer/util"
-	"github.com/elastic/go-elasticsearch/client"
 	"fmt"
+	"github.com/olivere/elastic"
 )
 
 type ESConnectionPool struct {
@@ -12,13 +12,13 @@ type ESConnectionPool struct {
 
 type ESConnection struct {
 	// the client connecting to a certain ES Node
-	ClientPtr *client.Client
+	ClientPtr *elastic.Client
 }
 
 /**
  *  connection pool for ElasticSearch
  */
-var ESPool ESConnectionPool = NewESConnectionPool()
+var ESPool = NewESConnectionPool()
 
 /**
  *  create a new connection pool containing ESConnection objects
@@ -40,7 +40,7 @@ func GetESConnectionByConfig(config *util.Config) (conn *ESConnection, err error
 		conn = connPtr
 
 	} else {
-		clientPtr, err := client.New(client.WithHost(config.ESHost))
+		clientPtr, err := elastic.NewClient(elastic.SetURL(config.ESHost))
 		if err != nil {
 			err = fmt.Errorf("something wrong when connecting to ES by host [%v] => %v", config.ESHost, err)
 		}
@@ -51,3 +51,5 @@ func GetESConnectionByConfig(config *util.Config) (conn *ESConnection, err error
 	}
 	return conn, err
 }
+
+

@@ -3,7 +3,6 @@ package http
 import (
 	"github.com/emicklei/go-restful"
 	"QPongServer/datastore"
-	"fmt"
 )
 
 /**
@@ -41,25 +40,5 @@ func generateTemplateForProject(req *restful.Request, res *restful.Response) {
 		res.WriteHeaderAndJson(500, PopulateModuleError(&err), restful.MIME_JSON)
 		return
 	}
-	fmt.Println("## responses =>", iResp)
-
-	/*
-	response, err := esConn.ClientPtr.Cat.Indices()
-	fmt.Println("** can do CAT?")
-	if err != nil {
-		meta := make(map[string]interface{}, 1)
-		origin, err2 := util.GetOriginFromHeaders(req.Request.Header)
-		if err2 != nil {
-			panic(err2)
-		}
-		meta["ip"] = origin.String()
-
-		errM := PopulateModuleError(&err, meta)
-		res.WriteHeaderAndJson(500, errM, restful.MIME_JSON)
-		return
-	}
-	var bBytes []byte
-	response.Response.Body.Read(bBytes)
-	fmt.Println(string(bBytes))
-	*/
+	res.WriteHeaderAndJson(200, iResp, restful.MIME_JSON)
 }

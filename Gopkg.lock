@@ -30,6 +30,27 @@
   version = "v2.7.1"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/mailru/easyjson"
+  packages = [
+    ".",
+    "buffer",
+    "jlexer",
+    "jwriter"
+  ]
+  revision = "9825584555aa620c53c265d4a09ace0df1346fd9"
+
+[[projects]]
+  name = "github.com/olivere/elastic"
+  packages = [
+    ".",
+    "config",
+    "uritemplates"
+  ]
+  revision = "dabcc5de0a3fd6313870c223c3119e2b1e942ba3"
+  version = "~v6.1.23"
+
+[[projects]]
   name = "github.com/pkg/errors"
   packages = ["."]
   revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
@@ -38,6 +59,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "6aa98d15aa5883a8c4cfc49c3dd9ac30ce883c2be96ad1a6587101e1fdc2ba50"
+  inputs-digest = "519dde56496b9867b994a5e4b2755dbe64e7d330463fb65c26b307de35545584"
   solver-name = "gps-cdcl"
   solver-version = 1
