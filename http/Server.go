@@ -8,6 +8,10 @@ import (
 	"sync"
 	"context"
 	"time"
+	"os"
+	"os/signal"
+	"syscall"
+	"QPongServer/datastore"
 )
 
 
@@ -58,7 +62,26 @@ func newQPongServer() QPongServerInstance {
 	mrc.Background = context.Background()
 	instance.MRequestContext = &mrc
 
+
+	// setup signal intercepts
+	go serverExitSequence()
+
 	return instance
+}
+
+func serverExitSequence() {
+	signalChannel := make(chan os.Signal, 1)
+	signal.Notify(signalChannel, syscall.SIGINT, syscall.SIGTERM)
+
+	sig := <- signalChannel
+	fmt.Println("sig received =>", sig)
+	// call cleanup method(s)
+	_, err := datastore.ESPool.ESConnectionPoolCleanup()
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	os.Exit(1)
 }
 
 func (server *QPongServerInstance) AddModules(modules []*restful.WebService) (err error) {

@@ -66,7 +66,7 @@ func connectToES(config *util.Config) (*elastic.Client, error) {
 /**
  *  cleanup method (called when the server is going to die)
  */
-func (o *ESConnectionPool) Cleanup() (ok bool, err error) {
+func (o *ESConnectionPool) ESConnectionPoolCleanup() (ok bool, err error) {
 	if o.PoolPtr != nil && len(o.PoolPtr)>0 {
 		for _, esConn := range o.PoolPtr {
 			ok, err = IsESConnValid(esConn)
