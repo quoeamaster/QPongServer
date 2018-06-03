@@ -1,6 +1,8 @@
 package http
 
-import "reflect"
+import (
+	"reflect"
+)
 
 /* ***************************** */
 /*    structs for the modules    */
