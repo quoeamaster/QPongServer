@@ -22,7 +22,8 @@ func NewTemplateModule() *restful.WebService {
 func generateTemplateForProject(req *restful.Request, res *restful.Response) {
 	projectId := req.PathParameter("project-id")
 	projectInstancePtr := datastore.NewProjectEntity(projectId)
-	// TODO: add design etc and test connectivity to ES (based on a closed ES, see what would happen)
+
+	// add design etc and test connectivity to ES (based on a closed ES, see what would happen)
 	projectInstancePtr.AddDesign(
 		datastore.NewDesignEntity().AddSpec(
 			datastore.NewSpecEntity().

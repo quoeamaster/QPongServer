@@ -4,7 +4,6 @@
     <list default="true" id="737bbf8c-5b34-4a4a-bcb8-6667ffcf16de" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/datastore/ESConnector.go" beforeDir="false" afterPath="$PROJECT_DIR$/datastore/ESConnector.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/datastore/ProjectService.go" beforeDir="false" afterPath="$PROJECT_DIR$/datastore/ProjectService.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/http/Server.go" beforeDir="false" afterPath="$PROJECT_DIR$/http/Server.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/http/TemplateModule.go" beforeDir="false" afterPath="$PROJECT_DIR$/http/TemplateModule.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,8 +18,8 @@
       <file leaf-file-name="TemplateModule.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/http/TemplateModule.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="35" column="14" lean-forward="true" selection-start-line="35" selection-start-column="14" selection-end-line="35" selection-end-column="14" />
+            <state relative-caret-position="400">
+              <caret line="38" column="32" lean-forward="true" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -37,21 +36,12 @@
       <file leaf-file-name="Server.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/http/Server.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="217">
+            <state relative-caret-position="335">
               <caret line="58" column="45" selection-start-line="58" selection-start-column="45" selection-end-line="58" selection-end-column="45" />
               <folding>
                 <element signature="e#14#105#0" expanded="true" />
                 <element signature="n#!!block;n#GetQPongServer#0" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ESConnector.go" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/datastore/ESConnector.go">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-191">
-              <caret line="45" column="23" lean-forward="true" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -68,11 +58,20 @@
       <file leaf-file-name="ProjectService.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/datastore/ProjectService.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="59">
-              <caret line="24" column="61" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
+            <state relative-caret-position="387">
+              <caret line="40" column="4" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
               <folding>
                 <element signature="e#19#79#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ESConnector.go" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/datastore/ESConnector.go">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="523">
+              <caret line="84" column="5" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -113,6 +112,7 @@
         <option value="$PROJECT_DIR$/util/HttpUtil.go" />
         <option value="$PROJECT_DIR$/http/Server.go" />
         <option value="$PROJECT_DIR$/http/TemplateModule.go" />
+        <option value="$PROJECT_DIR$/util/TemplateUtil.go" />
         <option value="$PROJECT_DIR$/datastore/ESConnector.go" />
         <option value="$PROJECT_DIR$/datastore/ProjectService.go" />
       </list>
@@ -204,12 +204,12 @@
     <frame x="0" y="23" width="1280" height="777" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2657512" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2657512" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32876712" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32876712" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32876712" />
@@ -421,9 +421,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/http/ModuleError.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="1" lean-forward="true" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/http/Server.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="217">
+        <state relative-caret-position="335">
           <caret line="58" column="45" selection-start-line="58" selection-start-column="45" selection-end-line="58" selection-end-column="45" />
           <folding>
             <element signature="e#14#105#0" expanded="true" />
@@ -432,31 +439,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/http/ModuleError.go">
+    <entry file="file://$PROJECT_DIR$/util/TemplateUtil.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="1" lean-forward="true" selection-start-line="12" selection-start-column="1" selection-end-line="12" selection-end-column="1" />
+        <state relative-caret-position="30">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/http/TemplateModule.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="35" column="14" lean-forward="true" selection-start-line="35" selection-start-column="14" selection-end-line="35" selection-end-column="14" />
+        <state relative-caret-position="400">
+          <caret line="38" column="32" lean-forward="true" selection-start-line="38" selection-start-column="32" selection-end-line="38" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/datastore/ESConnector.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-191">
-          <caret line="45" column="23" lean-forward="true" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
+        <state relative-caret-position="523">
+          <caret line="84" column="5" selection-start-line="84" selection-start-column="5" selection-end-line="84" selection-end-column="5" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/datastore/ProjectService.go">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="59">
-          <caret line="24" column="61" selection-start-line="24" selection-start-column="61" selection-end-line="24" selection-end-column="61" />
+        <state relative-caret-position="387">
+          <caret line="40" column="4" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
           <folding>
             <element signature="e#19#79#0" expanded="true" />
           </folding>

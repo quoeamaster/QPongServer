@@ -22,18 +22,25 @@ func PersistProjectEntity(p *Project,
 	timeoutCtxCancelFx context.CancelFunc) (iResp *elastic.IndexResponse, err error) {
 
 	// use overwrite mechanism (not update api from es; just INDEX)
-	if esConn != nil && esConn.ClientPtr != nil && p != nil {
-		iResp, err = createIndexProjectSrv(esConn).BodyJson(*p).
-			Do(timeoutCtx)
-		if err != nil {
-			return iResp, err
-		}
-		// logical checks (such as response code is 500)
-		fmt.Println("response =>", iResp.Result)
+	var valid bool
 
-	} else {
+	valid, err = IsESConnValid(esConn)
+	if valid {
+		if p != nil {
+			iResp, err = createIndexProjectSrv(esConn).BodyJson(*p).
+				Do(timeoutCtx)
+			if err != nil {
+				return iResp, err
+			}
+			// logical checks (such as response code is 500)
+			fmt.Println("response =>", iResp.Result)
+		} else {
+			err = fmt.Errorf("project entity provied is nil~ [%v]", *p)
+		}
+	}
+	/* else {
 		err = fmt.Errorf("esConn is INVALID [%v]", esConn.ClientPtr)
-	}   // end -- if (esConn, clientPtr and p is valid)
+	}*/   // end -- if (esConn, clientPtr and p is valid)
 
 	defer func() {
 		if timeoutCtxCancelFx != nil {
@@ -45,6 +52,8 @@ func PersistProjectEntity(p *Project,
 	}()
 	return iResp, err
 }
+
+// TODO: extract the boiler plate code on handling the esConn related exception handling; ONLY focus on biz logic...
 
 // to cat indices...
 /*

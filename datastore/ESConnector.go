@@ -76,3 +76,11 @@ func (o *ESConnectionPool) Cleanup() (ok bool, err error) {
 	}   // end -- if (poolPtr is valid)
 	return ok, err
 }
+
+func IsESConnValid(esConn *ESConnection) (bool, error) {
+	if esConn != nil && esConn.ClientPtr != nil {
+		return true, nil
+	} else {
+		return false, fmt.Errorf("esConn is INVALID [%v]", esConn.ClientPtr)
+	}
+}
