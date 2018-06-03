@@ -2,25 +2,6 @@
 
 
 [[projects]]
-  branch = "master"
-  name = "github.com/elastic/go-elasticsearch"
-  packages = [
-    "api",
-    "api/cat",
-    "api/cluster",
-    "api/indices",
-    "api/ingest",
-    "api/nodes",
-    "api/remote",
-    "api/snapshot",
-    "api/tasks",
-    "client",
-    "transport",
-    "util"
-  ]
-  revision = "8d1b946718be9164d29d2d9c60091d02e0546cf9"
-
-[[projects]]
   name = "github.com/emicklei/go-restful"
   packages = [
     ".",
@@ -59,6 +40,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "519dde56496b9867b994a5e4b2755dbe64e7d330463fb65c26b307de35545584"
+  inputs-digest = "6148d4a2ed4bce9f890621c4da870f4912e3b0a4ebbb0db841f1f7582c797177"
   solver-name = "gps-cdcl"
   solver-version = 1
