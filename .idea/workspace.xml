@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="737bbf8c-5b34-4a4a-bcb8-6667ffcf16de" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/datastore/ProjectService.go" beforeDir="false" afterPath="$PROJECT_DIR$/datastore/ProjectService.go" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -31,7 +33,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Server.go" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Server.go" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/http/Server.go">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="185">
@@ -52,11 +54,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ProjectService.go" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ProjectService.go" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/datastore/ProjectService.go">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="310">
-              <caret line="54" selection-start-line="54" selection-end-line="54" />
+            <state relative-caret-position="295">
+              <caret line="52" column="4" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="4" />
               <folding>
                 <element signature="e#19#79#0" expanded="true" />
               </folding>
@@ -98,11 +100,11 @@
         <option value="$PROJECT_DIR$/Main.go" />
         <option value="$PROJECT_DIR$/util/HttpUtil.go" />
         <option value="$PROJECT_DIR$/util/TemplateUtil.go" />
-        <option value="$PROJECT_DIR$/datastore/ProjectService.go" />
         <option value="$PROJECT_DIR$/http/TemplateModule.go" />
         <option value="$PROJECT_DIR$/datastore/ESConnector.go" />
         <option value="$PROJECT_DIR$/http/ModuleError.go" />
         <option value="$PROJECT_DIR$/http/Server.go" />
+        <option value="$PROJECT_DIR$/datastore/ProjectService.go" />
       </list>
     </option>
   </component>
@@ -420,16 +422,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/datastore/ProjectService.go">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="54" selection-start-line="54" selection-end-line="54" />
-          <folding>
-            <element signature="e#19#79#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/datastore/ESConnector.go">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="731">
@@ -460,6 +452,16 @@
           <caret line="78" column="4" selection-start-line="78" selection-start-column="4" selection-end-line="78" selection-end-column="4" />
           <folding>
             <element signature="n#!!block;n#GetQPongServer#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/datastore/ProjectService.go">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="52" column="4" selection-start-line="52" selection-start-column="4" selection-end-line="52" selection-end-column="4" />
+          <folding>
+            <element signature="e#19#79#0" expanded="true" />
           </folding>
         </state>
       </provider>
