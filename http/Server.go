@@ -69,6 +69,11 @@ func newQPongServer() QPongServerInstance {
 	return instance
 }
 
+/**
+ *  exit sequences for QPon Server shutdown
+ *  add lifecycle hooks like "system halt" "interrupt" etc and
+ *  call the corresponding service's Cleanup method (e.g. ESConnector.Cleanup)
+ */
 func serverExitSequence() {
 	signalChannel := make(chan os.Signal, 1)
 	signal.Notify(signalChannel, syscall.SIGINT, syscall.SIGTERM)
@@ -84,6 +89,10 @@ func serverExitSequence() {
 	os.Exit(1)
 }
 
+
+/**
+ *  helper method to add more WebService module(s)
+ */
 func (server *QPongServerInstance) AddModules(modules []*restful.WebService) (err error) {
 	for _, ws := range modules {
 		restful.Add(ws)
@@ -96,12 +105,17 @@ func (server *QPongServerInstance) AddModules(modules []*restful.WebService) (er
 	return err
 }
 
+/**
+ *  method to start Qpon server
+ */
 func (server *QPongServerInstance) StartServer(config *util.Config) error {
 	serverPortString := fmt.Sprintf(":%v", config.ServerPort)
 	fmt.Printf("** QPong server started at %v port **\n", config.ServerPort)
 
 	return http.ListenAndServe(serverPortString, nil)
 }
+
+
 
 /**
  *  get the context with timeout (60s) plus the cancelFunction (you can use it or wait till 60s timeout)
@@ -114,5 +128,5 @@ func (o *ModuleRequestContext) GetDefaultContextAndCancelFunc() (ctx context.Con
 	return context.WithTimeout(context.Background(), duration60s)
 }
 
-// TODO: add lifecycle hooks like "system halt" "interrupt" etc and call the corresponding service's Cleanup method (e.g. ESConnector.Cleanup)
+
 
