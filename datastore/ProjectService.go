@@ -53,8 +53,6 @@ func PersistProjectEntity(p *Project,
 	return iResp, err
 }
 
-// TODO: extract the boiler plate code on handling the esConn related exception handling; ONLY focus on biz logic...
-
 // to cat indices...
 /*
 catISrv := client.CatIndices().Pretty(true).Columns("index", "health").Sort("index", "health")

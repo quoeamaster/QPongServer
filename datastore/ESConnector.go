@@ -69,7 +69,8 @@ func connectToES(config *util.Config) (*elastic.Client, error) {
 func (o *ESConnectionPool) Cleanup() (ok bool, err error) {
 	if o.PoolPtr != nil && len(o.PoolPtr)>0 {
 		for _, esConn := range o.PoolPtr {
-			if esConn != nil && esConn.ClientPtr != nil {
+			ok, err = IsESConnValid(esConn)
+			if ok == true {
 				esConn.ClientPtr = nil
 			}   // end -- esConn and esConn.ClientPtr != nil
 		}   // end -- for (iterate the pool's esConn)
@@ -77,6 +78,9 @@ func (o *ESConnectionPool) Cleanup() (ok bool, err error) {
 	return ok, err
 }
 
+/**
+ *  check is ESConnection instance is valid or not
+ */
 func IsESConnValid(esConn *ESConnection) (bool, error) {
 	if esConn != nil && esConn.ClientPtr != nil {
 		return true, nil

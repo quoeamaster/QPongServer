@@ -24,8 +24,6 @@ type QPongServerInstance struct {
  *  struct to declare the context for webservice modules to use
  */
 type ModuleRequestContext struct {
-	Default context.Context
-	DefaultCancelFunc context.CancelFunc
 	Background context.Context
 }
 
@@ -56,12 +54,7 @@ func newQPongServer() QPongServerInstance {
 	instance.ServerConfig = cfgPtr
 
 	// setup the context(s)
-	duration60s, err := time.ParseDuration("60s")
-	if err != nil {
-		panic(err)
-	}
 	mrc := ModuleRequestContext{}
-	mrc.Default, mrc.DefaultCancelFunc = context.WithTimeout(context.Background(), duration60s)
 	mrc.Background = context.Background()
 	instance.MRequestContext = &mrc
 
@@ -85,6 +78,17 @@ func (server *QPongServerInstance) StartServer(config *util.Config) error {
 	fmt.Printf("** QPong server started at %v port **\n", config.ServerPort)
 
 	return http.ListenAndServe(serverPortString, nil)
+}
+
+/**
+ *  get the context with timeout (60s) plus the cancelFunction (you can use it or wait till 60s timeout)
+ */
+func (o *ModuleRequestContext) GetDefaultContextAndCancelFunc() (ctx context.Context, cancelFx context.CancelFunc) {
+	duration60s, err := time.ParseDuration("60s")
+	if err != nil {
+		panic(err)
+	}
+	return context.WithTimeout(context.Background(), duration60s)
 }
 
 // TODO: add lifecycle hooks like "system halt" "interrupt" etc and call the corresponding service's Cleanup method (e.g. ESConnector.Cleanup)

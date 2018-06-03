@@ -36,9 +36,12 @@ func generateTemplateForProject(req *restful.Request, res *restful.Response) {
 		res.WriteHeaderAndJson(500, PopulateModuleError(&err), restful.MIME_JSON)
 		return
 	}
+	// get the default context + cancel fx
+	ctx, ctxCancel := GetQPongServer().MRequestContext.GetDefaultContextAndCancelFunc()
 	iResp, err := datastore.PersistProjectEntity(projectInstancePtr,
-		esConn, GetQPongServer().MRequestContext.Background,
-		nil)
+		esConn,
+		ctx, ctxCancel)
+		// ** OR the background context... GetQPongServer().MRequestContext.Background, nil)
 	if err != nil {
 		res.WriteHeaderAndJson(500, PopulateModuleError(&err), restful.MIME_JSON)
 		return
