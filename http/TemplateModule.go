@@ -35,7 +35,9 @@ func generateTemplateForProject(req *restful.Request, res *restful.Response) {
 		res.WriteHeaderAndJson(500, PopulateModuleError(&err), restful.MIME_JSON)
 		return
 	}
-	iResp, err := datastore.PersistProjectEntity(projectInstancePtr, esConn)
+	iResp, err := datastore.PersistProjectEntity(projectInstancePtr,
+		esConn, GetQPongServer().MRequestContext.Background,
+		nil)
 	if err != nil {
 		res.WriteHeaderAndJson(500, PopulateModuleError(&err), restful.MIME_JSON)
 		return

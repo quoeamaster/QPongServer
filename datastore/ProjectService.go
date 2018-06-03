@@ -2,31 +2,43 @@ package datastore
 
 import (
 	"fmt"
-	"context"
 	"github.com/olivere/elastic"
+	"context"
 )
 
 const IndexProject = "qpong_project"
 const DocType =      "doc"
 
+func createIndexProjectSrv(esConn *ESConnection) *elastic.IndexService {
+	return esConn.ClientPtr.Index().
+		Index(IndexProject).Type(DocType).Pretty(true)
+}
+
 // TODO: a mechanism to create settings and mappings for the 1st time as well...
 
-func PersistProjectEntity(p *Project, esConn *ESConnection) (iResp *elastic.IndexResponse, err error) {
+func PersistProjectEntity(p *Project,
+	esConn *ESConnection,
+	timeoutCtx context.Context,
+	timeoutCtxCancelFx context.CancelFunc) (iResp *elastic.IndexResponse, err error) {
+
 	// use overwrite mechanism (not update api from es; just INDEX)
 	if esConn != nil && esConn.ClientPtr != nil && p != nil {
-		client := esConn.ClientPtr
-		iResp, err = client.Index().Index("qpon_project").
-			Type("doc").Pretty(true).BodyJson(*p).
-			Do(context.Background())
+		iResp, err = createIndexProjectSrv(esConn).BodyJson(*p).
+			Do(timeoutCtx)
 		if err != nil {
 			return iResp, err
 		}
 		// logical checks (such as response code is 500)
 		fmt.Println("response =>", iResp.Result)
 
+	} else {
+		err = fmt.Errorf("esConn is INVALID [%v]", esConn.ClientPtr)
 	}   // end -- if (esConn, clientPtr and p is valid)
 
 	defer func() {
+		if timeoutCtxCancelFx != nil {
+			timeoutCtxCancelFx()
+		}
 		if r := recover(); r != nil {
 			err = fmt.Errorf("%v", r)
 		}

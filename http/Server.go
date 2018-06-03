@@ -6,6 +6,8 @@ import (
 	"fmt"
 	"QPongServer/util"
 	"sync"
+	"context"
+	"time"
 )
 
 
@@ -15,6 +17,16 @@ var serverInstance QPongServerInstance
 
 type QPongServerInstance struct {
 	ServerConfig *util.Config
+	MRequestContext *ModuleRequestContext
+}
+
+/**
+ *  struct to declare the context for webservice modules to use
+ */
+type ModuleRequestContext struct {
+	Default context.Context
+	DefaultCancelFunc context.CancelFunc
+	Background context.Context
 }
 
 /**
@@ -43,6 +55,16 @@ func newQPongServer() QPongServerInstance {
 	}
 	instance.ServerConfig = cfgPtr
 
+	// setup the context(s)
+	duration60s, err := time.ParseDuration("60s")
+	if err != nil {
+		panic(err)
+	}
+	mrc := ModuleRequestContext{}
+	mrc.Default, mrc.DefaultCancelFunc = context.WithTimeout(context.Background(), duration60s)
+	mrc.Background = context.Background()
+	instance.MRequestContext = &mrc
+
 	return instance
 }
 
@@ -65,5 +87,5 @@ func (server *QPongServerInstance) StartServer(config *util.Config) error {
 	return http.ListenAndServe(serverPortString, nil)
 }
 
-
+// TODO: add lifecycle hooks like "system halt" "interrupt" etc and call the corresponding service's Cleanup method (e.g. ESConnector.Cleanup)
 

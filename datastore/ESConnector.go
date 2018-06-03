@@ -40,9 +40,11 @@ func GetESConnectionByConfig(config *util.Config) (conn *ESConnection, err error
 		conn = connPtr
 
 	} else {
-		clientPtr, err := elastic.NewClient(elastic.SetURL(config.ESHost))
+		var clientPtr *elastic.Client
+
+		clientPtr, err = connectToES(config)
 		if err != nil {
-			err = fmt.Errorf("something wrong when connecting to ES by host [%v] => %v", config.ESHost, err)
+			return nil, err
 		}
 		// create a new ESConnection instance and put it back to the pool
 		conn = &ESConnection{}
@@ -52,4 +54,25 @@ func GetESConnectionByConfig(config *util.Config) (conn *ESConnection, err error
 	return conn, err
 }
 
+func connectToES(config *util.Config) (*elastic.Client, error) {
+	clientPtr, err := elastic.NewClient(elastic.SetURL(config.ESHost))
+	if err != nil {
+		err = fmt.Errorf("something wrong when connecting to ES by host [%v] => %v", config.ESHost, err)
+		return nil, err
+	}
+	return clientPtr, nil
+}
 
+/**
+ *  cleanup method (called when the server is going to die)
+ */
+func (o *ESConnectionPool) Cleanup() (ok bool, err error) {
+	if o.PoolPtr != nil && len(o.PoolPtr)>0 {
+		for _, esConn := range o.PoolPtr {
+			if esConn != nil && esConn.ClientPtr != nil {
+				esConn.ClientPtr = nil
+			}   // end -- esConn and esConn.ClientPtr != nil
+		}   // end -- for (iterate the pool's esConn)
+	}   // end -- if (poolPtr is valid)
+	return ok, err
+}
