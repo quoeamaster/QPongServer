@@ -13,6 +13,7 @@ const HeaderAccessControlAllowOrigin = "Access-Control-Allow-Origin"
  *  filter to check if the request Origin is allowed for accessing the server's api / endpoint
  */
 func OriginCheckFilter(req *restful.Request, resp *restful.Response, chain *restful.FilterChain) {
+    fmt.Println("** inside security fileter")
     origin, err := util.GetOriginFromHeaders(req.Request.Header)
     if err != nil {
         resp.WriteHeaderAndJson(500, PopulateModuleError(&err), restful.MIME_JSON)

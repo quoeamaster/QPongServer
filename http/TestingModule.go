@@ -22,11 +22,12 @@ func NewTestingModule() *restful.WebService {
 		Consumes(restful.MIME_JSON, restful.MIME_XML, restful.MIME_OCTET).
 		Produces(restful.MIME_JSON)
 
-	srv.Filter(OriginCheckFilter)
+	//srv.Filter(restful.CrossOriginResourceSharing).Filter(OriginCheckFilter)
+    srv.Filter(OriginCheckFilter)
 
 	// test on GET, POST route
 	srv.Route(srv.GET("/{productId}").To(getProductById)).
-		Route(srv.POST("").To(postProductsUpdateToAll))
+		Route(srv.POST("").To(postProductIdUpload))
 
 	return srv
 }
@@ -59,8 +60,10 @@ func getProductById(req *restful.Request, res *restful.Response) {
     }
 }
 
-func postProductsUpdateToAll(req *restful.Request, res *restful.Response) {
+func postProductIdUpload(req *restful.Request, res *restful.Response) {
+    fmt.Println(req.Request.MultipartForm.File)
 
+    res.WriteHeaderAndJson(200, "everything seems ok", restful.MIME_JSON)
 }
 
 
