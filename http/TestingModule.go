@@ -18,16 +18,17 @@ type TestingModel struct {
 
 func NewTestingModule() *restful.WebService {
 	srv := new(restful.WebService)
+// TODO: add multipart/form-data as the consume... type too
+// TODO: use another way to capture the file-upload instead then... can't use the restful.Webservice directly
 	srv.Path("/testing").
-		Consumes(restful.MIME_JSON, restful.MIME_XML, restful.MIME_OCTET).
+		Consumes(restful.MIME_JSON, restful.MIME_XML).
 		Produces(restful.MIME_JSON)
-
-	//srv.Filter(restful.CrossOriginResourceSharing).Filter(OriginCheckFilter)
-    srv.Filter(OriginCheckFilter)
 
 	// test on GET, POST route
 	srv.Route(srv.GET("/{productId}").To(getProductById)).
 		Route(srv.POST("").To(postProductIdUpload))
+
+	fmt.Println(srv.Routes()[0].Consumes)
 
 	return srv
 }

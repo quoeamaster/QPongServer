@@ -26,7 +26,7 @@ func OriginCheckFilter(req *restful.Request, resp *restful.Response, chain *rest
 
     } else {
         // add back the corresponding Access-Control-Allow-Origin header
-        resp.AddHeader(HeaderAccessControlAllowOrigin, origin.Address)
+        //resp.AddHeader(HeaderAccessControlAllowOrigin, origin.Address)
 
         // everything is fine, forward to the next "filter"
         chain.ProcessFilter(req, resp)

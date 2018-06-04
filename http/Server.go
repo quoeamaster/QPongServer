@@ -18,6 +18,7 @@ import (
 // singleton... MUST be handled here
 var syncLock sync.Once
 var serverInstance QPongServerInstance
+var wsContainer *restful.Container
 
 type QPongServerInstance struct {
 	ServerConfig *util.Config
@@ -62,6 +63,9 @@ func newQPongServer() QPongServerInstance {
 	mrc.Background = context.Background()
 	instance.MRequestContext = &mrc
 
+	// setup the restful.Container
+	wsContainer = restful.NewContainer()
+
 
 	// setup signal intercepts
 	go serverExitSequence()
@@ -95,7 +99,8 @@ func serverExitSequence() {
  */
 func (server *QPongServerInstance) AddModules(modules []*restful.WebService) (err error) {
 	for _, ws := range modules {
-		restful.Add(ws)
+        //restful.Add(ws)
+	    wsContainer.Add(ws)
 	}   // end -- for (modules)
 	defer func() {
 		if r := recover(); r != nil {
@@ -112,7 +117,43 @@ func (server *QPongServerInstance) StartServer(config *util.Config) error {
 	serverPortString := fmt.Sprintf(":%v", config.ServerPort)
 	fmt.Printf("** QPong server started at %v port **\n", config.ServerPort)
 
-	return http.ListenAndServe(serverPortString, nil)
+	// setup the cors for this server
+    // Add container filter to enable CORS
+    cors := restful.CrossOriginResourceSharing {
+        ExposeHeaders:  []string{"X-My-Header"},
+        AllowedHeaders: []string{"Content-Type", "Accept"},
+        AllowedMethods: []string{"GET", "POST"},
+        CookiesAllowed: false,
+        Container:      wsContainer,
+    }
+    // Add container filter to respond to OPTIONS
+    //wsContainer.Filter(wsContainer.OPTIONSFilter) // not applicable for my case...
+    wsContainer.Filter(optionFilterFx)
+    wsContainer.Filter(cors.Filter)
+    wsContainer.Filter(OriginCheckFilter)
+
+    // start server with wsContainer as Handler
+	return http.ListenAndServe(serverPortString, wsContainer)
+}
+
+/**
+ *  self implemented OPTIONS func
+ */
+func optionFilterFx(req *restful.Request, resp *restful.Response, chain *restful.FilterChain) {
+    if "OPTIONS" != req.Request.Method {
+        chain.ProcessFilter(req, resp)
+        return
+    }
+
+    //archs := req.Request.Header.Get(restful.HEADER_AccessControlAllowHeaders)
+    archs := req.Request.Header.Get(restful.HEADER_AccessControlRequestHeaders)
+    methods := "POST,GET,DELETE,PUT,OPTIONS,HEAD"
+    origin := req.Request.Header.Get(restful.HEADER_Origin)
+
+    resp.AddHeader(restful.HEADER_Allow, methods)
+    resp.AddHeader(restful.HEADER_AccessControlAllowHeaders, archs)
+    resp.AddHeader(restful.HEADER_AccessControlAllowMethods, methods)
+    resp.AddHeader(restful.HEADER_AccessControlAllowOrigin, origin)
 }
 
 
