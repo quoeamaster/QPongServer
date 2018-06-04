@@ -42,13 +42,3 @@ func GetOriginFromHeaders(header http.Header) (origin Origin, err error) {
 	return origin, err
 }
 
-/**
- * TODO:
- *  helper method to check if the provided origin could
- *  access the server's features.
- *  the allowed origin address list is configured in config files or other sources
- */
-func IsOriginAllowed(origin Origin) (bool, error) {
-
-	return false, nil
-}

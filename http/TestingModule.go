@@ -22,6 +22,8 @@ func NewTestingModule() *restful.WebService {
 		Consumes(restful.MIME_JSON, restful.MIME_XML, restful.MIME_OCTET).
 		Produces(restful.MIME_JSON)
 
+	srv.Filter(OriginCheckFilter)
+
 	// test on GET, POST route
 	srv.Route(srv.GET("/{productId}").To(getProductById)).
 		Route(srv.POST("").To(postProductsUpdateToAll))
@@ -41,7 +43,7 @@ func getProductById(req *restful.Request, res *restful.Response) {
 	pId := req.PathParameter("productId")
 	testingModel := TestingModel{}
 
-	debugOriginFromHeader(req.Request.Header)
+	//debugOriginFromHeader(req.Request.Header)
 
 	switch pId {
 	case "101":
@@ -51,11 +53,10 @@ func getProductById(req *restful.Request, res *restful.Response) {
 		testingModel.ArtistId = "unknown"
 		testingModel.ResourceName = "unknown"
 	}
-	res.AddHeader("Access-Control-Allow-Origin", "http://localhost:8080")
-	err := res.WriteHeaderAndJson(200, testingModel, restful.MIME_JSON)
-	if err != nil {
-		panic(err)
-	}
+    err := res.WriteHeaderAndJson(200, testingModel, restful.MIME_JSON)
+    if err != nil {
+        panic(err)
+    }
 }
 
 func postProductsUpdateToAll(req *restful.Request, res *restful.Response) {

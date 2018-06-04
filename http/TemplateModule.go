@@ -14,6 +14,9 @@ func NewTemplateModule() *restful.WebService {
 		Consumes(restful.MIME_JSON).
 		Produces(restful.MIME_JSON)
 
+	// add security filter(s) to the service
+	srv.Filter(OriginCheckFilter)
+
 	srv.Route(srv.POST("/generate/{project-id}").To(generateTemplateForProject))
 
 	return srv
