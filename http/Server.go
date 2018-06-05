@@ -1,7 +1,6 @@
 package http
 
 import (
-	"net/http"
 	"github.com/emicklei/go-restful"
 	"fmt"
 	"QPongServer/util"
@@ -12,6 +11,7 @@ import (
 	"os/signal"
 	"syscall"
 	"QPongServer/datastore"
+    "net/http"
 )
 
 
@@ -132,8 +132,11 @@ func (server *QPongServerInstance) StartServer(config *util.Config) error {
     wsContainer.Filter(cors.Filter)
     wsContainer.Filter(OriginCheckFilter)
 
+    // TODO: add a new Handler for testing-upload/{productId}... see if works or not...
+    //wsContainer.Handle("/testing-upload/{productId}", nil)
+
     // start server with wsContainer as Handler
-	return http.ListenAndServe(serverPortString, wsContainer)
+    return http.ListenAndServe(serverPortString, wsContainer)
 }
 
 /**
@@ -154,6 +157,8 @@ func optionFilterFx(req *restful.Request, resp *restful.Response, chain *restful
     resp.AddHeader(restful.HEADER_AccessControlAllowHeaders, archs)
     resp.AddHeader(restful.HEADER_AccessControlAllowMethods, methods)
     resp.AddHeader(restful.HEADER_AccessControlAllowOrigin, origin)
+
+    // PS. add logic on OriginCheck here as well??? since should be logical to do so...
 }
 
 

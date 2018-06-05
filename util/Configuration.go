@@ -18,6 +18,7 @@ type Config struct {
 	AllowedAccessList []string `toml:"allowed-access-list"`
 	ESHost string `toml:"es.host"`
 	ServerPort int `toml:"server.port"`
+	ServerDataPath string `toml:"server.data.path"`
 }
 
 /**

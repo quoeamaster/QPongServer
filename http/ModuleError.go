@@ -14,7 +14,7 @@ type ModuleError struct {
 	Meta map[string]interface{}
 }
 
-func PopulateModuleError(e *error, meta... map[string]interface{}) ModuleError {
+func NewModuleError(e *error, meta... map[string]interface{}) ModuleError {
 	m := ModuleError{}
 	errType := reflect.TypeOf(*e)
 

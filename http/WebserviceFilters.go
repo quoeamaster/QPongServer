@@ -7,27 +7,24 @@ import (
     "github.com/emicklei/go-restful"
 )
 
-const HeaderAccessControlAllowOrigin = "Access-Control-Allow-Origin"
+//const HeaderAccessControlAllowOrigin = "Access-Control-Allow-Origin"
 
 /**
  *  filter to check if the request Origin is allowed for accessing the server's api / endpoint
  */
 func OriginCheckFilter(req *restful.Request, resp *restful.Response, chain *restful.FilterChain) {
-    fmt.Println("** inside security fileter")
+    //fmt.Println("** inside security fileter")
     origin, err := util.GetOriginFromHeaders(req.Request.Header)
     if err != nil {
-        resp.WriteHeaderAndJson(500, PopulateModuleError(&err), restful.MIME_JSON)
+        resp.WriteHeaderAndJson(500, NewModuleError(&err), restful.MIME_JSON)
         return
     }
     _, err = isOriginAllowed(origin, GetQPongServer().ServerConfig.AllowedAccessList)
     if err != nil {
-        resp.WriteHeaderAndJson(500, PopulateModuleError(&err), restful.MIME_JSON)
+        resp.WriteHeaderAndJson(500, NewModuleError(&err), restful.MIME_JSON)
         return
 
     } else {
-        // add back the corresponding Access-Control-Allow-Origin header
-        //resp.AddHeader(HeaderAccessControlAllowOrigin, origin.Address)
-
         // everything is fine, forward to the next "filter"
         chain.ProcessFilter(req, resp)
     }

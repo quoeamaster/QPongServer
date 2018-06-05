@@ -33,7 +33,7 @@ func generateTemplateForProject(req *restful.Request, res *restful.Response) {
 	// get esConnection
 	esConn, err := datastore.GetESConnectionByConfig(GetQPongServer().ServerConfig)
 	if err != nil {
-		res.WriteHeaderAndJson(500, PopulateModuleError(&err), restful.MIME_JSON)
+		res.WriteHeaderAndJson(500, NewModuleError(&err), restful.MIME_JSON)
 		return
 	}
 	// get the default context + cancel fx
@@ -43,7 +43,7 @@ func generateTemplateForProject(req *restful.Request, res *restful.Response) {
 		ctx, ctxCancel)
 		// ** OR the background context... GetQPongServer().MRequestContext.Background, nil)
 	if err != nil {
-		res.WriteHeaderAndJson(500, PopulateModuleError(&err), restful.MIME_JSON)
+		res.WriteHeaderAndJson(500, NewModuleError(&err), restful.MIME_JSON)
 		return
 	}
 	res.WriteHeaderAndJson(200, iResp, restful.MIME_JSON)
