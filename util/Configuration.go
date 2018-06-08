@@ -19,7 +19,7 @@ package util
 import (
 	"os"
 	"fmt"
-	"CFactor/TOML"
+	"github.com/quoeamaster/CFactor/TOML"
 	"reflect"
 )
 

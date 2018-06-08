@@ -37,9 +37,15 @@
   revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
   version = "v0.8.0"
 
+[[projects]]
+  name = "github.com/quoeamaster/CFactor"
+  packages = ["TOML"]
+  revision = "88dc6f6b3836d6b1071dcf96dc4d1297af6ee3cf"
+  version = "v0.1.2"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "6148d4a2ed4bce9f890621c4da870f4912e3b0a4ebbb0db841f1f7582c797177"
+  inputs-digest = "36af738d79aa3e51ad311177c5e70cb7f0b37bbf82bc9f1e2f7c908be338207f"
   solver-name = "gps-cdcl"
   solver-version = 1
