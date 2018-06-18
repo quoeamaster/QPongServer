@@ -19,7 +19,41 @@ package http
 import (
 	"github.com/emicklei/go-restful"
 	"QPongServer/datastore"
+    "fmt"
+    "QPongServer/util"
 )
+
+// struct for encapsulating the request parameters
+type TemplateDataModel struct {
+    ProjectId string
+    Title string
+    Subtitle string
+    Description string
+    PickedImageList []string
+    PickedCategoryList []string
+}
+
+// create an instance of TemplateDataModel struct based on the provided
+// data provided
+func NewTemplateDataModel(projectId, title, subtitle, description, pickedImageListString, pickedCategoryListString string) TemplateDataModel  {
+    m := TemplateDataModel{}
+
+    if !util.IsStringEmpty(projectId) {
+        m.ProjectId = projectId
+    }
+    if !util.IsStringEmpty(title) {
+        m.Title = title
+    }
+    if !util.IsStringEmpty(subtitle) {
+        m.Subtitle = subtitle
+    }
+    if !util.IsStringEmpty(description) {
+        m.Description = description
+    }
+    // TODO: convert the string back to array
+
+    return m
+}
 
 /**
  *  creation of the TemplateModule
@@ -30,7 +64,8 @@ func NewTemplateModule() *restful.WebService {
 		Consumes(restful.MIME_JSON).
 		Produces(restful.MIME_JSON)
 
-	srv.Route(srv.POST("/generate/{project-id}").To(generateTemplateForProject))
+	srv.Route(srv.POST("/generate/{project-id}").To(generateTemplateForProject)).
+		Route(srv.GET("/suggestLayout").To(suggestLayoutWithProjectId))
 
 	return srv
 }
@@ -63,4 +98,22 @@ func generateTemplateForProject(req *restful.Request, res *restful.Response) {
 		return
 	}
 	res.WriteHeaderAndJson(200, iResp, restful.MIME_JSON)
+}
+
+// method to get suggestion on LAYOUT based on the given data:
+// 1) title, subtitle and description;
+// 2) the picked image(s)
+// 3) theoretically, the suggestions should come from some AI or ML results
+//      (but due to the fact that the project is still young; at the meantime
+//      only simple if then else logic would pretend to the smart brain)
+func suggestLayoutWithProjectId(req *restful.Request, res *restful.Response)  {
+    // this projectId should be saved later on...
+    // TODO: (caching by "projectId" and "suggestionId" etc)
+    projectId := req.QueryParameter("projectId")
+    fmt.Println(req.QueryParameter("pickedImages"))
+    fmt.Println(req.QueryParameter("pickedCategories"))
+
+    res.WriteHeaderAndJson(200,
+        NewModuleResponse( fmt.Sprintf("testing only %v", projectId)),
+        restful.MIME_JSON)
 }

@@ -18,12 +18,10 @@ package http
 
 import (
 	"reflect"
+    "strings"
 )
 
-/* ***************************** */
-/*    structs for the modules    */
-/* ***************************** */
-
+// generic error struct
 type ModuleError struct {
 	ErrorMsg string
 	ErrorType string
@@ -42,4 +40,24 @@ func NewModuleError(e *error, meta... map[string]interface{}) ModuleError {
 	// add additional meta based on error type...
 
 	return m
+}
+
+
+// generic response struct
+type ModuleResponse struct {
+    Msg string
+    Meta map[string]interface{}
+}
+
+// method to construct an instance of ModuleResponse based on the given "msg"
+func NewModuleResponse(msg string, meta... map[string]interface{}) ModuleResponse {
+    m := ModuleResponse{}
+
+    if strings.Compare(strings.TrimSpace(msg), "") != 0 {
+        m.Msg = msg
+    }
+    if meta != nil && len(meta) > 0 {
+        m.Meta = meta[0]
+    }
+    return m
 }

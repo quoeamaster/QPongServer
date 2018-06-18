@@ -18,7 +18,6 @@ package http
 
 import (
 	"github.com/emicklei/go-restful"
-	"net/http"
 	"QPongServer/util"
 	"fmt"
 )
@@ -34,8 +33,6 @@ type TestingModel struct {
 
 func NewTestingModule() *restful.WebService {
 	srv := new(restful.WebService)
-// TODO: add multipart/form-data as the consume... type too
-// TODO: use another way to capture the file-upload instead then... can't use the restful.Webservice directly
 	srv.Path("/testing").
 		Consumes(restful.MIME_JSON, restful.MIME_XML, "multipart/form-data").
 		Produces(restful.MIME_JSON)
@@ -47,13 +44,14 @@ func NewTestingModule() *restful.WebService {
 	return srv
 }
 
+/*
 func debugOriginFromHeader(header http.Header) {
 	origin, err := util.GetOriginFromHeaders(header)
 	if err != nil {
 		panic(err)
 	}
 	fmt.Println("protocol=>",origin.Protocol,"host=>",origin.Host, "port=>", origin.Port, "fullAddr:", origin.Address)
-}
+} */
 
 func getProductById(req *restful.Request, res *restful.Response) {
 	pId := req.PathParameter("productId")
@@ -87,7 +85,9 @@ func postProductIdUpload(req *restful.Request, res *restful.Response) {
         fmt.Println(fileHeaderPtr.Filename, fileHeaderPtr.Size, fileHeaderPtr.Header)
     }
     if pfile != nil {
-        iBytes, err := util.WriteMultiPartFileToDisc(&pfile, util.NewStorageMeta(GetQPongServer().ServerConfig.ServerDataPath+"/"+fileHeaderPtr.Filename))
+        iBytes, err := util.WriteMultiPartFileToDisc(&pfile,
+            util.NewStorageMeta(GetQPongServer().ServerConfig.ServerDataPath+"/"+fileHeaderPtr.Filename))
+
         if err != nil {
             fmt.Println("bb write to disc failed")
             res.WriteHeaderAndJson(500, NewModuleError(&err), restful.MIME_JSON)

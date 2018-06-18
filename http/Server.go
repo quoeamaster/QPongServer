@@ -82,7 +82,6 @@ func newQPongServer() QPongServerInstance {
 	// setup the restful.Container
 	wsContainer = restful.NewContainer()
 
-
 	// setup signal intercepts
 	go serverExitSequence()
 
