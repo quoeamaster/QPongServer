@@ -21,6 +21,8 @@ import (
 	"QPongServer/datastore"
     "fmt"
     "QPongServer/util"
+    "net/url"
+    "strings"
 )
 
 // struct for encapsulating the request parameters
@@ -29,30 +31,101 @@ type TemplateDataModel struct {
     Title string
     Subtitle string
     Description string
-    PickedImageList []string
-    PickedCategoryList []string
+    PickedImageList []map[string]interface{}
+    PickedCategoryList []map[string]interface{}
 }
 
 // create an instance of TemplateDataModel struct based on the provided
 // data provided
-func NewTemplateDataModel(projectId, title, subtitle, description, pickedImageListString, pickedCategoryListString string) TemplateDataModel  {
+func NewTemplateDataModel(form url.Values) TemplateDataModel  {
+    var val string
     m := TemplateDataModel{}
 
-    if !util.IsStringEmpty(projectId) {
-        m.ProjectId = projectId
+    // TODO: prevent this brittle way to handle the form...
+    // single values...
+    val = form.Get("projectId")
+    if !util.IsStringEmpty(val) {
+        m.ProjectId = val
     }
-    if !util.IsStringEmpty(title) {
-        m.Title = title
+    val = form.Get("title")
+    if !util.IsStringEmpty(val) {
+        m.Title = val
     }
-    if !util.IsStringEmpty(subtitle) {
-        m.Subtitle = subtitle
+    val = form.Get("subtitle")
+    if !util.IsStringEmpty(val) {
+        m.Subtitle = val
     }
-    if !util.IsStringEmpty(description) {
-        m.Description = description
+    val = form.Get("description")
+    if !util.IsStringEmpty(val) {
+        m.Description = val
     }
-    // TODO: convert the string back to array
+    // array values...
+    m.PickedImageList = prepareLoopedImageList(form)
+    m.PickedCategoryList = prepareLoopedCategoryList(form)
 
     return m
+}
+
+// helper method to prepare the pickedCategoryList
+func prepareLoopedCategoryList(form url.Values) []map[string]interface{} {
+    var val string
+    list := make([]map[string]interface{}, 0)
+    idx := 0
+
+    for true {
+        props := make(map[string]interface{}, 1)
+
+        val = form.Get(fmt.Sprintf("pickedCategoryList[%v][image]", idx))
+        if strings.Compare(val, "") != 0 {
+            props["image"] = val
+        } else {
+            break
+        }
+        val = form.Get(fmt.Sprintf("pickedCategoryList[%v][id]", idx))
+        if strings.Compare(val, "") != 0 {
+            props["id"] = val
+        }
+        val = form.Get(fmt.Sprintf("pickedCategoryList[%v][title]", idx))
+        if strings.Compare(val, "") != 0 {
+            props["title"] = val
+        }
+        list = append(list, props)
+        idx++
+    }
+    return list
+}
+
+// helper method to prepare the pickedImageList
+func prepareLoopedImageList(form url.Values) []map[string]interface{} {
+    var val string
+    list := make([]map[string]interface{}, 0)
+    idx := 0
+
+    for true {
+        props := make(map[string]interface{}, 1)
+
+        val = form.Get(fmt.Sprintf("pickedImageList[%v][image]", idx))
+        if strings.Compare(val, "") != 0 {
+            props["image"] = val
+        } else {
+            break
+        }
+        val = form.Get(fmt.Sprintf("pickedImageList[%v][categoryId]", idx))
+        if strings.Compare(val, "") != 0 {
+            props["categoryId"] = val
+        }
+        val = form.Get(fmt.Sprintf("pickedImageList[%v][id]", idx))
+        if strings.Compare(val, "") != 0 {
+            props["id"] = val
+        }
+        val = form.Get(fmt.Sprintf("pickedImageList[%v][title]", idx))
+        if strings.Compare(val, "") != 0 {
+            props["title"] = val
+        }
+        list = append(list, props)
+        idx++
+    }
+    return list
 }
 
 /**
@@ -110,10 +183,12 @@ func suggestLayoutWithProjectId(req *restful.Request, res *restful.Response)  {
     // this projectId should be saved later on...
     // TODO: (caching by "projectId" and "suggestionId" etc)
     projectId := req.QueryParameter("projectId")
-    fmt.Println(req.QueryParameter("pickedImages"))
-    fmt.Println(req.QueryParameter("pickedCategories"))
+    dataModel := NewTemplateDataModel(req.Request.Form)
+    fmt.Println(dataModel.PickedImageList[0]["image"])
+    fmt.Println(len(dataModel.PickedImageList))
+
 
     res.WriteHeaderAndJson(200,
-        NewModuleResponse( fmt.Sprintf("testing only %v", projectId)),
+        NewModuleResponse( fmt.Sprintf("testing only %v => %v", projectId, dataModel)),
         restful.MIME_JSON)
 }
