@@ -182,13 +182,12 @@ func generateTemplateForProject(req *restful.Request, res *restful.Response) {
 func suggestLayoutWithProjectId(req *restful.Request, res *restful.Response)  {
     // this projectId should be saved later on...
     // TODO: (caching by "projectId" and "suggestionId" etc)
-    projectId := req.QueryParameter("projectId")
     dataModel := NewTemplateDataModel(req.Request.Form)
     fmt.Println(dataModel.PickedImageList[0]["image"])
     fmt.Println(len(dataModel.PickedImageList))
 
 
     res.WriteHeaderAndJson(200,
-        NewModuleResponse( fmt.Sprintf("testing only %v => %v", projectId, dataModel)),
+        NewModuleResponse( fmt.Sprintf("testing only %v", dataModel)),
         restful.MIME_JSON)
 }
