@@ -186,6 +186,7 @@ func suggestLayoutWithProjectId(req *restful.Request, res *restful.Response)  {
     fmt.Println(dataModel.PickedImageList[0]["image"])
     fmt.Println(len(dataModel.PickedImageList))
 
+    // TODO: pretend AI / ML => to generate the suggestion
 
     res.WriteHeaderAndJson(200,
         NewModuleResponse( fmt.Sprintf("testing only %v", dataModel)),
